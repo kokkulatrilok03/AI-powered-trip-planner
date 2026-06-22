@@ -6,10 +6,11 @@ A production-ready, multi-user AI travel planner that generates personalized iti
 
 | Service  | URL |
 |----------|-----|
-| Frontend | _Add your Vercel URL here_ |
-| Backend  | https://ai-powered-trip-planner.onrender.com |
-| API Base | https://ai-powered-trip-planner.onrender.com/api |
-| Video    | _Add your 3–4 min walkthrough link here_ |
+| **Frontend** | https://ai-powered-trip-planner-frontend.vercel.app |
+| **Backend** | https://ai-powered-trip-planner.onrender.com |
+| **API** | https://ai-powered-trip-planner.onrender.com/api |
+| **GitHub** | https://github.com/kokkulatrilok03/AI-powered-trip-planner |
+| Video | _Add your 3–4 min walkthrough link here_ |
 
 ## Tech Stack
 
@@ -194,11 +195,21 @@ npm run dev:frontend # http://localhost:3000
 
 > **Important:** Do NOT use `npm run build` — that also builds the frontend and fails on Render. Backend only.
 
-### Frontend (Vercel)
+### Frontend (Vercel) — Live
 
-1. Import repo, set root to `frontend/`
-2. Add `NEXT_PUBLIC_API_URL=https://your-backend.onrender.com/api`
+**URL:** https://ai-powered-trip-planner-frontend.vercel.app
+
+1. Import repo, set **Root Directory** to `frontend`
+2. Environment variable: `NEXT_PUBLIC_API_URL=https://ai-powered-trip-planner.onrender.com/api`
 3. Deploy
+
+### Production environment (Render)
+
+Set on Render dashboard:
+
+```
+FRONTEND_URL=https://ai-powered-trip-planner-frontend.vercel.app,http://localhost:3000
+```
 
 ## Design Decisions & Trade-offs
 
