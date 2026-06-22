@@ -12,7 +12,11 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "build:backend": "npm run build --workspace=backend",
     "build:frontend": "npm run build --workspace=frontend",
-    "build": "npm run build:backend && npm run build:frontend"
+    "build": "npm run build:backend && npm run build:frontend",
+    "start:backend": "npm run start --workspace=backend"
+  },
+  "engines": {
+    "node": ">=20 <23"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

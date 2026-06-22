@@ -181,13 +181,17 @@ npm run dev:frontend # http://localhost:3000
 
 ## Deployment
 
-### Backend (Render / Railway)
+### Backend (Render)
 
-1. Connect GitHub repo, set root to `backend/`
-2. Build: `npm install && npm run build`
-3. Start: `npm start`
-4. Add environment variables from `.env.example`
-5. Whitelist `0.0.0.0/0` in MongoDB Atlas Network Access (or restrict to host IP)
+1. Connect GitHub repo `kokkulatrilok03/AI-powered-trip-planner`
+2. **Root Directory:** leave empty (repo root — monorepo)
+3. **Build Command:** `npm install --include=dev && npm run build --workspace=backend`
+4. **Start Command:** `npm run start --workspace=backend`
+5. **Health Check Path:** `/api/health`
+6. Add environment variables from `backend/.env.example`
+7. Whitelist `0.0.0.0/0` in MongoDB Atlas Network Access
+
+> **Important:** Do NOT use `npm run build` — that also builds the frontend and fails on Render. Backend only.
 
 ### Frontend (Vercel)
 
