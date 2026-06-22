@@ -7,7 +7,8 @@ A production-ready, multi-user AI travel planner that generates personalized iti
 | Service  | URL |
 |----------|-----|
 | Frontend | _Add your Vercel URL here_ |
-| Backend  | _Add your Render/Railway URL here_ |
+| Backend  | https://ai-powered-trip-planner.onrender.com |
+| API Base | https://ai-powered-trip-planner.onrender.com/api |
 | Video    | _Add your 3–4 min walkthrough link here_ |
 
 ## Tech Stack

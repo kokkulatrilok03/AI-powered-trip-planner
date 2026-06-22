@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import { env } from './config/env';
+import { env, allowedOrigins } from './config/env';
 import { connectDatabase } from './config/database';
 import routes from './routes';
 import { errorHandler, notFoundHandler } from './middleware/error.middleware';
@@ -17,11 +17,19 @@ app.use(
         ? (origin, callback) => {
             if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
               callback(null, true);
+            } else if (allowedOrigins.includes(origin)) {
+              callback(null, true);
             } else {
-              callback(null, env.FRONTEND_URL);
+              callback(new Error('Not allowed by CORS'));
             }
           }
-        : env.FRONTEND_URL,
+        : (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+              callback(null, true);
+            } else {
+              callback(new Error('Not allowed by CORS'));
+            }
+          },
     credentials: true,
   })
 );
