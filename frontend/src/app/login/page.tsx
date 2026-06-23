@@ -26,9 +26,11 @@ export default function LoginPage() {
       await login(email, password);
       router.push('/dashboard');
     } catch (err: unknown) {
-      const message =
-        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
-        'Login failed. Please check your credentials.';
+      const axiosErr = err as { response?: { data?: { message?: string } }; message?: string };
+      const message = axiosErr.response?.data?.message
+        || (axiosErr.message === 'Network Error'
+          ? 'Cannot reach server. The backend may be waking up — wait 30s and try again.'
+          : 'Login failed. Please check your credentials.');
       setError(message);
     } finally {
       setIsLoading(false);

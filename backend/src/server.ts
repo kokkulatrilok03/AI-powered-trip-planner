@@ -10,26 +10,18 @@ import { errorHandler, notFoundHandler } from './middleware/error.middleware';
 const app = express();
 
 app.use(helmet());
+const corsOriginCheck = (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+  if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin) || allowedOrigins.includes(origin)) {
+    callback(null, true);
+    return;
+  }
+  console.warn(`CORS blocked origin: ${origin}`);
+  callback(null, false);
+};
+
 app.use(
   cors({
-    origin:
-      env.NODE_ENV === 'development'
-        ? (origin, callback) => {
-            if (!origin || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
-              callback(null, true);
-            } else if (allowedOrigins.includes(origin)) {
-              callback(null, true);
-            } else {
-              callback(new Error('Not allowed by CORS'));
-            }
-          }
-        : (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-              callback(null, true);
-            } else {
-              callback(new Error('Not allowed by CORS'));
-            }
-          },
+    origin: env.NODE_ENV === 'development' ? corsOriginCheck : corsOriginCheck,
     credentials: true,
   })
 );

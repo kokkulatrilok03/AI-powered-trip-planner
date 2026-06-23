@@ -25,4 +25,11 @@ if (!parsed.success) {
 
 export const env = parsed.data;
 
-export const allowedOrigins = env.FRONTEND_URL.split(',').map((origin) => origin.trim());
+const PRODUCTION_FRONTEND_URL = 'https://ai-powered-trip-planner-frontend.vercel.app';
+
+export const allowedOrigins = [
+  ...new Set([
+    ...env.FRONTEND_URL.split(',').map((origin) => origin.trim()).filter(Boolean),
+    PRODUCTION_FRONTEND_URL,
+  ]),
+];

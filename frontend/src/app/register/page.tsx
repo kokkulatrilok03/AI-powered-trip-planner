@@ -27,9 +27,11 @@ export default function RegisterPage() {
       await register(name, email, password);
       router.push('/dashboard');
     } catch (err: unknown) {
-      const message =
-        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
-        'Registration failed. Please try again.';
+      const axiosErr = err as { response?: { data?: { message?: string } }; message?: string };
+      const message = axiosErr.response?.data?.message
+        || (axiosErr.message === 'Network Error'
+          ? 'Cannot reach server. The backend may be waking up — wait 30s and try again.'
+          : 'Registration failed. Please try again.');
       setError(message);
     } finally {
       setIsLoading(false);
